@@ -68,7 +68,7 @@ for fp in os.listdir("whales"):
     tmp = tmp.set_index(['Datetime'])
 
     tmp["activity"] = [i for i in range(1,len(tmp)+1)]
-    ax[1].plot_date(tmp.index, tmp["activity"], linestyle='solid', label=name[0:10], color = colors[j])
+    ax[1].plot_date(tmp.index, tmp["activity"], linestyle='solid', label=name[0:10], color = colors[len(colors)-1-j])
     j+=1
 ax[1].legend()
 
