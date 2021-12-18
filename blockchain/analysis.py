@@ -36,8 +36,10 @@ for i in range(10):
 smalldf = smalldf.sort_values(by=['NormalizedStake'], ascending=True)
 smalldf['shortAddress'] = smalldf['Address']
 
+colors_dict = {}
 for i in range(len(smalldf)):
     smalldf['shortAddress'][i] =  smalldf['shortAddress'][i][0:10]
+    colors_dict[smalldf['shortAddress'][i]] = colors[i]
 ax[0].bar(smalldf['shortAddress'], smalldf["NormalizedStake"], color=colors)
 ax[0].set_title("Governance token distribution for the 10 largest individual stakeholders")
 ax[0].set_ylabel(r'Relative Stake ($\alpha \in [0,1]$)')
@@ -68,7 +70,7 @@ for fp in os.listdir("whales"):
     tmp = tmp.set_index(['Datetime'])
 
     tmp["activity"] = [i for i in range(1,len(tmp)+1)]
-    ax[1].plot_date(tmp.index, tmp["activity"], linestyle='solid', label=name[0:10], color = colors[len(colors)-1-j])
+    ax[1].plot_date(tmp.index, tmp["activity"], linestyle='solid', label=name[0:10], color = colors_dict[name[0:10]])
     j+=1
 ax[1].legend()
 
